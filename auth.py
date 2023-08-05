@@ -16,9 +16,10 @@ class Auth:
 
 BASE_DIR = pathlib.Path(__file__)
 
-# DB_ENGINE = create_engine(f"sqlite:///{BASE_DIR.parent}/data/db", echo=True)
 
 try:
+    # DB_ENGINE = create_engine(f"sqlite:///{BASE_DIR.parent}/data/db", echo=True)
+    
     DB_ENGINE = create_engine(f"mysql+pymysql://erfa6313_admin:Erfnhd100%@203.175.8.110/erfa6313_erfanhuda?charset=utf8mb4", echo=True)
 
     DB_SESSION = scoped_session(sessionmaker(autoflush=False, bind=DB_ENGINE))
@@ -32,5 +33,5 @@ try:
         cursor.close()
 
 except ConnectionError as e:
-    print("Error occurred")
+    print("Error connection occurred, kindly check again")
 

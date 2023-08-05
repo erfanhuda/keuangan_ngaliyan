@@ -22,6 +22,7 @@ class User(TimeStampModel):
     id = Column(Integer, primary_key=True, autoincrement=True)
     user = Column(String(255), nullable=False, unique=True)
     passw = Column(String(255))
+    app_key = Column(String(255))
 
     preference = Relationship("Preference", back_populates="user", uselist=False, passive_deletes=True)
     person = Relationship("Person", back_populates="user", passive_deletes=True)
@@ -62,3 +63,9 @@ class PeopleRoles(TimeStampModel):
 
     person_id = Column(Integer, ForeignKey("person.id", ondelete="CASCADE"), primary_key=True)
     role_id = Column(Integer, ForeignKey("role.id", ondelete="CASCADE"), primary_key=True)
+
+class SetoranBulanan(TimeStampModel):
+    __tablename__ = "people_setoran"
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    setoran_type = Column(Integer)
