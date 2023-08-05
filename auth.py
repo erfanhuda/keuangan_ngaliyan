@@ -16,12 +16,21 @@ class Auth:
 
 BASE_DIR = pathlib.Path(__file__)
 
-DB_ENGINE = create_engine(f"sqlite:///{BASE_DIR.parent}/data/db", echo=True)
+# DB_ENGINE = create_engine(f"sqlite:///{BASE_DIR.parent}/data/db", echo=True)
 
-DB_SESSION = scoped_session(sessionmaker(autoflush=False, bind=DB_ENGINE))
+try:
+    DB_ENGINE = create_engine(f"mysql+pymysql://erfa6313_admin:Erfnhd100%@203.175.8.110/erfa6313_erfanhuda?charset=utf8mb4", echo=True)
 
-@event.listens_for(Engine, "connect")
-def set_sqlite_pragma(dbapi_connection, connection_record):
-    cursor = dbapi_connection.cursor()
-    cursor.execute("PRAGMA foreign_keys=ON")
-    cursor.close()
+    DB_SESSION = scoped_session(sessionmaker(autoflush=False, bind=DB_ENGINE))
+
+    print("Connection successful")
+
+    @event.listens_for(Engine, "connect")
+    def set_sqlite_pragma(dbapi_connection, connection_record):
+        cursor = dbapi_connection.cursor()
+        # cursor.execute("PRAGMA foreign_keys=ON")
+        cursor.close()
+
+except ConnectionError as e:
+    print("Error occurred")
+

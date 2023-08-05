@@ -6,8 +6,8 @@ class Person(TimeStampModel):
     __tablename__ = "person"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=False, unique=True)
-    phone = Column(String, unique=True)
+    name = Column(String(255), nullable=False, unique=True)
+    phone = Column(String(255), unique=True)
     family_id = Column(Integer, ForeignKey("person.id"), nullable=True)
     user_id = Column(Integer, ForeignKey("user.id"), nullable=False, index=True)
 
@@ -20,8 +20,8 @@ class User(TimeStampModel):
     __tablename__ = "user"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user = Column(String, nullable=False, unique=True)
-    passw = Column(String)
+    user = Column(String(255), nullable=False, unique=True)
+    passw = Column(String(255))
 
     preference = Relationship("Preference", back_populates="user", uselist=False, passive_deletes=True)
     person = Relationship("Person", back_populates="user", passive_deletes=True)
@@ -51,8 +51,8 @@ class Role(Model):
     __tablename__ = "role"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=False)
-    slug = Column(String, nullable=False, unique=True)
+    name = Column(String(255), nullable=False)
+    slug = Column(String(255), nullable=False, unique=True)
 
     people = Relationship("Person", secondary="people_roles", back_populates="role", passive_deletes=True)
 
