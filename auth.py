@@ -18,9 +18,9 @@ BASE_DIR = pathlib.Path(__file__)
 
 
 try:
-    # DB_ENGINE = create_engine(f"sqlite:///{BASE_DIR.parent}/data/db", echo=True)
-    
     DB_ENGINE = create_engine(f"mysql+pymysql://erfa6313_admin:Erfnhd100%@203.175.8.110/erfa6313_erfanhuda?charset=utf8mb4", echo=True)
+    
+    DB_LOCAL = create_engine(f"sqlite:///{BASE_DIR.parent}/data/db", echo=True)
 
     DB_SESSION = scoped_session(sessionmaker(autoflush=False, bind=DB_ENGINE))
 

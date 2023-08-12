@@ -1,4 +1,4 @@
-from auth import DB_ENGINE as engine, DB_SESSION as session
+from auth import DB_ENGINE as engine, DB_SESSION as session, DB_LOCAL as local
 from model.base import Model
 from model.model import * 
 import sqlalchemy as sa
